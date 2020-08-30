@@ -81,3 +81,10 @@ jobs:
       run: ansible-playbook flarum.yml -i hosts.yml -v
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
+    
+    - name: Run Nextcloud Ansible Playbook
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      working-directory: ansible
+      run: ansible-playbook nextcloud.yml -i hosts.yml -v
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false

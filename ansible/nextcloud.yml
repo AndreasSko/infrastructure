@@ -1,0 +1,20 @@
+- hosts: all
+  tasks:
+  - name: Create Nextcloud directory
+    file:
+      path: /docker/nextcloud
+      state: directory
+      owner: ubuntu
+    become: true
+  - name: Upload all files
+    copy:
+      src: files/nextcloud/{{ item }}
+      dest: /docker/nextcloud
+    with_items:
+      - docker-compose.yml
+      - nginx.conf
+  - name: Start up Nextcloud docker-compose 
+    command: docker-compose up -d
+    become: yes
+    args:
+      chdir: /docker/nextcloud
