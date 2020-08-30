@@ -74,4 +74,10 @@ jobs:
       run: ansible-playbook init.yml -i hosts.yml -v
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
-
+    
+    - name: Run Flarum Ansible Playbook
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      working-directory: ansible
+      run: ansible-playbook flarum.yml -i hosts.yml -v
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false

@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx
+    container_name: flarum_nginx
+    restart: always
+    environment:
+      - VIRTUAL_HOST=bthl-tours.andreas-sk.de
+      - LETSENCRYPT_HOST=bthl-tours.andreas-sk.de
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./volumes/assets:/flarum/app/public/assets
+      - ./volumes/extensions:/flarum/app/extensions
+    expose:
+      - "80"
+    networks:
+      - flarum 
+      - public
+
+  flarum:
+    image: mondedie/flarum:stable
+    container_name: flarum
+    hostname: flarum
+    restart: always
+    env_file:
+      - ./flarum.env
+    volumes:
+      - ./volumes/assets:/flarum/app/public/assets
+      - ./volumes/extensions:/flarum/app/extensions
+      - ./volumes/nginx:/etc/nginx/conf.d
+    depends_on:
+      - mariadb
+    networks:
+      - flarum 
+
+  mariadb:
+    image: mariadb:10.4
+    container_name: flarum_mariadb
+    hostname: mariadb
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=NOTSECURE
+      - MYSQL_DATABASE=flarum
+      - MYSQL_USER=flarum
+      - MYSQL_PASSWORD=8uaewf8ifa9oewodsu9e
+    volumes:
+      - ./volumes/mysql/db:/var/lib/mysql
+    networks:
+      - flarum 
+
+networks:
+  flarum:
+  public:
+    name: public
