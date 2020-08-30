@@ -6,4 +6,20 @@
       become: true
     - role: nickjj.swapfile
       become: true
-  
+  tasks:
+    - name: Create docker directory
+      file:
+        path: /docker/ingress
+        state: directory
+        owner: ubuntu
+        recurse: true
+      become: true
+    - name: Upload docker-compose for ingress
+      copy:
+        src: files/ingress/docker-compose.yml
+        dest: /docker/ingress
+    - name: Start up ingress docker-compose 
+      command: docker-compose up -d
+      become: yes
+      args:
+        chdir: /docker/ingress
