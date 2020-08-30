@@ -1,0 +1,9 @@
+- hosts: all
+  vars:
+    swapfile_size: 2048
+  roles:
+    - role: geerlingguy.docker
+      become: true
+    - role: nickjj.swapfile
+      become: true
+  
