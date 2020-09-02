@@ -1,6 +1,6 @@
 variable "hcloud_location" {
   type    = string
-  default = "fsn1"
+  default = "nbg1"
 }
 
 variable "ssh_pub_key" {
