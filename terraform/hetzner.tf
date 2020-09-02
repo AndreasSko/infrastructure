@@ -10,7 +10,6 @@ resource "hcloud_server" "andreas_sk" {
 
   user_data = <<-EOT
   #cloud-config
-  package_upgrade: true
   disable_root: true
   ssh_pwauth: no
   allow_public_ssh_keys: true
