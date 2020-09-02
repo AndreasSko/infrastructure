@@ -19,6 +19,9 @@
     become: yes
     args:
       chdir: /docker/flarum
+    environment:
+      FLARUM_MYSQL_ROOT_PASSWORD: "{{ lookup('env','FLARUM_MYSQL_ROOT_PASSWORD') }}"
+      FLARUM_MYSQL_PASSWORD: "{{ lookup('env','FLARUM_MYSQL_PASSWORD') }}"
   - name: Install dependencies
     command: docker exec -it flarum composer require {{ item }}
     with_items:

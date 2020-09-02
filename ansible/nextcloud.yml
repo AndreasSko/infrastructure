@@ -18,3 +18,10 @@
     become: yes
     args:
       chdir: /docker/nextcloud
+    environment:
+      NEXTCLOUD_MYSQL_ROOT_PASSWORD: "{{ lookup('env','NEXTCLOUD_MYSQL_ROOT_PASSWORD') }}"
+      NEXTCLOUD_MYSQL_PASSWORD: "{{ lookup('env','NEXTCLOUD_MYSQL_PASSWORD') }}"
+      NEXTCLOUD_OBJECTSTORE_S3_BUCKET: "{{ lookup('env','NEXTCLOUD_OBJECTSTORE_S3_BUCKET') }}"
+      NEXTCLOUD_OBJECTSTORE_S3_KEY: "{{ lookup('env','NEXTCLOUD_OBJECTSTORE_S3_KEY') }}"
+      NEXTCLOUD_OBJECTSTORE_S3_SECRET: "{{ lookup('env','NEXTCLOUD_OBJECTSTORE_S3_SECRET') }}"
+      
