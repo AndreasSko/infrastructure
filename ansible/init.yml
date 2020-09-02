@@ -41,8 +41,11 @@
 
     - name: Upload docker-compose for ingress
       copy:
-        src: files/ingress/docker-compose.yml
+        src: files/ingress/{{ item }}
         dest: /docker/ingress
+      with_items:
+      - docker-compose.yml
+      - custom.conf
 
     - name: Start up ingress docker-compose 
       command: docker-compose up -d
