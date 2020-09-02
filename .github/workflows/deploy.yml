@@ -74,16 +74,7 @@ jobs:
       run: ansible-playbook init.yml -i hosts.yml -v
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
-    
-    - name: Run Flarum Ansible Playbook
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      working-directory: ansible
-      run: ansible-playbook flarum.yml -i hosts.yml -v
-      env:
-        ANSIBLE_HOST_KEY_CHECKING: false
-        FLARUM_MYSQL_ROOT_PASSWORD: ${{ secrets.FLARUM_MYSQL_ROOT_PASSWORD }}
-        FLARUM_MYSQL_PASSWORD: ${{ secrets.FLARUM_MYSQL_PASSWORD }}
-    
+
     - name: Run Nextcloud Ansible Playbook
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       working-directory: ansible
@@ -95,3 +86,12 @@ jobs:
         NEXTCLOUD_OBJECTSTORE_S3_BUCKET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_BUCKET }}
         NEXTCLOUD_OBJECTSTORE_S3_KEY: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_KEY }}
         NEXTCLOUD_OBJECTSTORE_S3_SECRET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_SECRET }}
+    
+    - name: Run Flarum Ansible Playbook
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      working-directory: ansible
+      run: ansible-playbook flarum.yml -i hosts.yml -v
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false
+        FLARUM_MYSQL_ROOT_PASSWORD: ${{ secrets.FLARUM_MYSQL_ROOT_PASSWORD }}
+        FLARUM_MYSQL_PASSWORD: ${{ secrets.FLARUM_MYSQL_PASSWORD }}
