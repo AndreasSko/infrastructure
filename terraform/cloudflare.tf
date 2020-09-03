@@ -19,7 +19,7 @@ resource "cloudflare_record" "nextcloud" {
   name    = "nextcloud.andreas-sk.de"
   value   = hcloud_server.andreas_sk.ipv4_address
   type    = "A"
-  proxied = true
+  ttl     = 120
 }
 
 resource "cloudflare_record" "monitoring" {
