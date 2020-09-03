@@ -3,6 +3,7 @@ version: '3.8'
 services:
   web:
     image: nginx
+    container_name: nextcloud_nginx
     restart: always
     environment:
       - VIRTUAL_HOST=nextcloud.andreas-sk.de
@@ -20,6 +21,7 @@ services:
   
   nextcloud:
     image: nextcloud:fpm
+    container_name: nextcloud
     hostname: nextcloud
     restart: always
     environment:
@@ -44,6 +46,7 @@ services:
 
   mariadb:
     image: mariadb
+    container_name: nextcloud_mariadb
     hostname: mariadb
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
