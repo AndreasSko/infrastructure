@@ -12,6 +12,8 @@ services:
       - ./volumes/etc/nginx/vhost.d:/etc/nginx/vhost.d
       - ./volumes/usr/share/nginx/html:/usr/share/nginx/html
       - ./custom.conf:/etc/nginx/conf.d/custom.conf:ro
+      # Can be removed when https://github.com/nginx-proxy/nginx-proxy/pull/1496 is merged
+      - ./nginx.tmpl:/app/nginx.tmpl
     ports:
       - 80:80
       - 443:443

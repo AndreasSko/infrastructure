@@ -46,6 +46,7 @@
       with_items:
       - docker-compose.yml
       - custom.conf
+      - nginx.tmpl
 
     - name: Start up ingress docker-compose 
       command: docker-compose up -d
