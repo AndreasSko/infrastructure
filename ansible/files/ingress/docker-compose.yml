@@ -21,6 +21,8 @@ services:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
     networks:
       - public
+    logging:
+      driver: local
 
   nginx-proxy-letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
@@ -35,6 +37,8 @@ services:
       - ./volumes/usr/share/nginx/html:/usr/share/nginx/html
     networks:
       - public
+    logging:
+      driver: local
 
 networks:
   public:

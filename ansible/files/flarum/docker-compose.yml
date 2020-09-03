@@ -17,6 +17,8 @@ services:
     networks:
       - flarum 
       - public
+    logging:
+      driver: local
 
   flarum:
     image: mondedie/flarum:stable
@@ -35,6 +37,8 @@ services:
       - mariadb
     networks:
       - flarum 
+    logging:
+      driver: local
 
   mariadb:
     image: mariadb:10.4
@@ -50,6 +54,8 @@ services:
       - ./volumes/mysql/db:/var/lib/mysql
     networks:
       - flarum 
+    logging:
+      driver: local
 
 networks:
   flarum:

@@ -21,7 +21,8 @@ services:
     networks:
       - monitoring
       - public
-
+    logging:
+      driver: local
 
   influxdb:
     image: influxdb:1.8-alpine
@@ -34,10 +35,13 @@ services:
       - INFLUXDB_DB=monitoring
       - INFLUXDB_USER=monitoring
       - INFLUXDB_USER_PASSWORD=${INFLUXDB_INFLUXDB_USER_PASSWORD}
+      - INFLUXD_LOG_LEVEL=error
     volumes:
       - ./volumes/influxdb/var/lib/influxdb:/var/lib/influxdb
     networks:
       - monitoring
+    logging:
+      driver: local
 
   grafana:
     image: grafana/grafana:7.1.5
@@ -59,6 +63,8 @@ services:
     networks:
       - public
       - monitoring
+    logging:
+      driver: local
 
 networks:
   monitoring:
