@@ -13,6 +13,7 @@
     with_items:
       - docker-compose.yml
       - nginx.conf
+      - www.conf
   - name: Start up Nextcloud docker-compose 
     command: docker-compose up -d
     become: yes

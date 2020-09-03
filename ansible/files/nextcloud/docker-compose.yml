@@ -34,6 +34,7 @@ services:
       - OBJECTSTORE_S3_REGION=eu-central-003
     volumes:
       - ./volumes/nextcloud:/var/www/html
+      - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
     networks:
       - nextcloud
 
