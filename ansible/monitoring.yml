@@ -1,0 +1,38 @@
+- hosts: all
+  tasks:
+  - name: Create Monitoring directory
+    file:
+      path: /docker/monitoring
+      state: directory
+      owner: ubuntu
+    become: true
+
+  - name: Upload all files
+    copy:
+      src: files/monitoring/{{ item }}
+      dest: /docker/monitoring
+    with_items:
+      - docker-compose.yml
+      - telegraf.conf
+      - datasources.yml
+      - server-dashboard.json
+
+  - name: Create directory for Grafana storage
+    file:
+      path: /docker/monitoring/volumes/grafana/var/lib/grafana
+      state: directory
+      recurse: true
+  
+  - name: Chown Grafana storage to correct user/group
+    command: chown -R 472:472 /docker/monitoring/volumes/grafana
+    become: true
+
+  - name: Start up Monitoring docker-compose 
+    command: docker-compose up -d
+    become: true
+    args:
+      chdir: /docker/monitoring
+    environment:
+      INFLUXDB_INFLUXDB_ADMIN_PASSWORD: "{{ lookup('env','INFLUXDB_INFLUXDB_ADMIN_PASSWORD') }}"
+      INFLUXDB_INFLUXDB_USER_PASSWORD: "{{ lookup('env','INFLUXDB_INFLUXDB_USER_PASSWORD') }}"
+      

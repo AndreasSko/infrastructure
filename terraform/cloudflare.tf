@@ -22,6 +22,14 @@ resource "cloudflare_record" "nextcloud" {
   proxied = true
 }
 
+resource "cloudflare_record" "monitoring" {
+  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
+  name    = "monitoring.andreas-sk.de"
+  value   = hcloud_server.andreas_sk.ipv4_address
+  type    = "A"
+  proxied = true
+}
+
 data "cloudflare_zones" "andreas_sk" {
   filter {
     name = "andreas-sk.de"
