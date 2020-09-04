@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  web:
-    image: nginx
+  nginx:
+    image: nginx:1.19.2-alpine
     container_name: nextcloud_nginx
     restart: always
     environment:
@@ -20,7 +20,7 @@ services:
       driver: local
   
   nextcloud:
-    image: nextcloud:fpm
+    image: nextcloud:19-fpm
     container_name: nextcloud
     hostname: nextcloud
     restart: always
@@ -45,7 +45,7 @@ services:
       driver: local
 
   mariadb:
-    image: mariadb
+    image: mariadb:10.5
     container_name: nextcloud_mariadb
     hostname: mariadb
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
