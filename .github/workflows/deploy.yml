@@ -75,6 +75,16 @@ jobs:
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
 
+    - name: Run B2 Ansible Playbook
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      working-directory: ansible
+      run: ansible-playbook b2.yml -i hosts.yml -v
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false
+        B2_BUCKET: ${{ secrets.B2_BUCKET }}
+        B2_KEY: ${{ secrets.B2_KEY }}
+        B2_SECRET: ${{ secrets.B2_SECRET }}
+
     - name: Run Monitoring Ansible Playbook
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       working-directory: ansible

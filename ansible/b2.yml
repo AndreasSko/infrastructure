@@ -1,0 +1,31 @@
+- hosts: all
+  tasks:
+    - name: Install S3FS
+      apt:
+        name: s3fs
+        state: present
+      become: true
+
+    - name: Create mountpoint
+      file:
+        path: /mnt/b2
+        state: directory
+      become: true
+
+    - name: Template and save B2 credentials
+      template:
+        src: files/b2/b2-credentials
+        dest: /etc/b2-credentials
+        owner: root
+        group: root
+        mode: 0600
+      become: true
+
+    - name: Set up s3fs automount
+      mount:
+        path: /mnt/b2
+        src: "{{ lookup('env','B2_BUCKET') }}"
+        fstype: fuse.s3fs
+        opts: _netdev,allow_other,nomixupload,passwd_file=/etc/b2-credentials,url=https://s3.eu-central-003.backblazeb2.com
+        state: mounted
+      become: true
