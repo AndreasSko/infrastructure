@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   nginx:
-    image: nginx
+    image: nginx:1.19.2-alpine
     container_name: flarum_nginx
     restart: always
     environment:
@@ -41,7 +41,7 @@ services:
       driver: local
 
   mariadb:
-    image: mariadb:10.4
+    image: mariadb:10.5
     container_name: flarum_mariadb
     hostname: mariadb
     restart: always
