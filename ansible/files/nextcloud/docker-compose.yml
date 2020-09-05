@@ -44,6 +44,19 @@ services:
       - nextcloud
     logging:
       driver: local
+  
+  cron:
+    image: rcdailey/nextcloud-cronjob
+    container_name: nextcloud_cron
+    restart: always
+    network_mode: none
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /etc/localtime:/etc/localtime:ro
+    environment:
+    - NEXTCLOUD_CONTAINER_NAME=nextcloud
+    - NEXTCLOUD_EXEC_SHELL_ARGS=-xc
+    - NEXTCLOUD_CRON_MINUTE_INTERVAL=5
 
   mariadb:
     image: mariadb:10.5
