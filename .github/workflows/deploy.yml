@@ -105,6 +105,15 @@ jobs:
         NEXTCLOUD_OBJECTSTORE_S3_BUCKET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_BUCKET }}
         NEXTCLOUD_OBJECTSTORE_S3_KEY: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_KEY }}
         NEXTCLOUD_OBJECTSTORE_S3_SECRET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_SECRET }}
+
+    - name: Run Flarum Rehearse Ansible Playbook
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      working-directory: ansible
+      run: ansible-playbook flarum_rehearse.yml -i hosts.yml -v
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false
+        FLARUM_REHEARSE_MYSQL_ROOT_PASSWORD: ${{ secrets.FLARUM_REHEARSE_MYSQL_ROOT_PASSWORD }}
+        FLARUM_REHEARSE_MYSQL_PASSWORD: ${{ secrets.FLARUM_REHEARSE_MYSQL_PASSWORD }}
     
     - name: Run Flarum Ansible Playbook
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
