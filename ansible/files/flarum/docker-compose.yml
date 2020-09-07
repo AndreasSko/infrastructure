@@ -21,7 +21,7 @@ services:
       driver: local
 
   flarum:
-    image: mondedie/flarum:stable
+    image: mondedie/flarum:v0.1.0-beta.13
     container_name: flarum
     hostname: flarum
     restart: always
