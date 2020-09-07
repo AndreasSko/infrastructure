@@ -6,6 +6,7 @@
       state: directory
       owner: ubuntu
     become: true
+
   - name: Upload all files
     copy:
       src: files/flarum_rehearse/{{ item }}
@@ -14,6 +15,13 @@
       - docker-compose.yml
       - flarum.env
       - nginx.conf
+      - composer.repositories.txt
+
+  - name: Template composer/auth.json
+    template:
+      src: files/flarum_rehearse/composer_auth.json
+      dest: /docker/flarum_rehearse/composer_auth.json
+
   - name: Start up Flarum Rehearse docker-compose 
     command: docker-compose up -d
     become: yes
@@ -22,6 +30,7 @@
     environment:
       FLARUM_REHEARSE_MYSQL_ROOT_PASSWORD: "{{ lookup('env','FLARUM_REHEARSE_MYSQL_ROOT_PASSWORD') }}"
       FLARUM_REHEARSE_MYSQL_PASSWORD: "{{ lookup('env','FLARUM_REHEARSE_MYSQL_PASSWORD') }}"
+
   - name: Install extensions
     command: docker exec -it flarum_rehearse extension require {{ item }}
     become: yes

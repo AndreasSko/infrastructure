@@ -1,0 +1,5 @@
+{
+    "github-oauth": {
+        "github.com": "{{ lookup('env','FLARUM_REHEARSE_GITHUB_TOKEN') }}"
+    }
+}

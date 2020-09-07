@@ -112,6 +112,7 @@ jobs:
       run: ansible-playbook flarum_rehearse.yml -i hosts.yml -v
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
+        FLARUM_REHEARSE_GITHUB_TOKEN: ${{ secrets.FLARUM_REHEARSE_GITHUB_TOKEN }}
         FLARUM_REHEARSE_MYSQL_ROOT_PASSWORD: ${{ secrets.FLARUM_REHEARSE_MYSQL_ROOT_PASSWORD }}
         FLARUM_REHEARSE_MYSQL_PASSWORD: ${{ secrets.FLARUM_REHEARSE_MYSQL_PASSWORD }}
     

@@ -33,6 +33,8 @@ services:
       - ./volumes/assets:/flarum/app/public/assets
       - ./volumes/extensions:/flarum/app/extensions
       - ./volumes/nginx:/etc/nginx/conf.d
+      - ./composer.repositories.txt:/flarum/app/extensions/composer.repositories.txt
+      - ./composer_auth.json:/root/.composer/auth.json
     depends_on:
       - mariadb
     networks:
