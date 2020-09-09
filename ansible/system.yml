@@ -1,0 +1,21 @@
+- hosts: all
+  tasks:
+  - name: Create System directory
+    file:
+      path: /docker/system
+      state: directory
+      owner: ubuntu
+    become: true
+
+  - name: Upload all files
+    copy:
+      src: files/system/{{ item }}
+      dest: /docker/system
+    with_items:
+      - docker-compose.yml
+
+  - name: Start up System docker-compose 
+    command: docker-compose up -d
+    become: true
+    args:
+      chdir: /docker/system
