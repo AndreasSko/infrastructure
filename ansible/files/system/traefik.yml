@@ -29,7 +29,7 @@ certificatesResolvers:
   letsencrypt:
     acme:
       email: me@andreas-sk.de
-      storage: acme.json
+      storage: /etc/traefik/acme/acme.json
       httpChallenge:
         # used during the challenge
         entryPoint: web
