@@ -39,6 +39,14 @@ resource "cloudflare_record" "monitoring" {
   proxied = true
 }
 
+resource "cloudflare_record" "traefik" {
+  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
+  name    = "traefik.andreas-sk.de"
+  value   = hcloud_server.andreas_sk.ipv4_address
+  type    = "A"
+  proxied = true
+}
+
 data "cloudflare_zones" "andreas_sk" {
   filter {
     name = "andreas-sk.de"
