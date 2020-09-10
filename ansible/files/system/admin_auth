@@ -1,0 +1,1 @@
+{{ lookup('env','TRAEFIK_ADMIN_USERNAME') }}:traefik:$2y${{ lookup('env','TRAEFIK_ADMIN_PASSWORD') | password_hash('bcrypt') }}

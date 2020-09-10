@@ -1,0 +1,40 @@
+providers:
+  docker:
+    exposedByDefault: false
+    network: public
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+http:
+  routers:
+    traefik:
+      service: api@internal
+      middlewares:
+        - admin_auth
+  middlewares:
+    admin_auth:
+      digestAuth:
+        usersFile: /etc/traefik/admin_auth
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: me@andreas-sk.de
+      storage: acme.json
+      httpChallenge:
+        # used during the challenge
+        entryPoint: web
+
+metrics:
+  influxDB:
+    address: influxdb:8086
+    protocol: http
+    database: monitoring
+    username: monitoring
+
+api:
+  dashboard: true

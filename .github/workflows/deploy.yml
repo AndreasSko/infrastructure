@@ -91,6 +91,7 @@ jobs:
       run: ansible-playbook system.yml -i hosts.yml -v
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
+        INFLUXDB_INFLUXDB_USER_PASSWORD: ${{ secrets.INFLUXDB_INFLUXDB_USER_PASSWORD }}
 
     - name: Run Monitoring Ansible Playbook
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'

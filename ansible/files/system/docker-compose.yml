@@ -1,6 +1,29 @@
 version: "3.8"
 
 services:
+  traefik:
+    image: traefik:v2.2
+    container_name: traefik
+    restart: always
+    environment:
+      - TRAEFIK_METRICS_INFLUXDB_PASSWORD=${INFLUXDB_INFLUXDB_USER_PASSWORD}
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml
+      - ./volumes/traefik/acme:/etc/traefik/acme
+      - ./admin_auth:/etc/traefik/admin_auth
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.traefik.rule: "Host(`traefik.andreas-sk.de`)"
+      traefik.http.routers.traefik.tls: "true"
+      traefik.http.routers.traefik.tls.certresolver: letsencrypt
+    networks:
+      - public
+      - monitoring
+
   ofelia:
     image: mcuadros/ofelia:v0.3.0
     container_name: ofelia
@@ -10,3 +33,9 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     logging:
       driver: local
+
+networks:
+  public:
+    name: public
+  monitoring:
+    name: monitoring

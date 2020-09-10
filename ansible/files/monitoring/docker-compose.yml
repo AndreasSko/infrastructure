@@ -49,8 +49,6 @@ services:
     container_name: grafana
     restart: always
     environment:
-      - VIRTUAL_HOST=monitoring.andreas-sk.de
-      - LETSENCRYPT_HOST=monitoring.andreas-sk.de
       - INFLUXDB_DB=monitoring
       - INFLUXDB_USER=monitoring
       - INFLUXDB_USER_PASSWORD=${INFLUXDB_INFLUXDB_USER_PASSWORD}
@@ -58,8 +56,12 @@ services:
       - ./datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:ro
       - ./server-dashboard.json:/etc/grafana/provisioning/dashboards/server-dashboard.json:ro
       - ./volumes/grafana/var/lib/grafana:/var/lib/grafana
-    expose:
-      - "3000"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.grafana.rule: Host(`monitoring.andreas-sk.de`)
+      traefik.http.services.grafana.loadbalancer.server.port: 3000
+      traefik.http.routers.grafana.tls: "true"
+      traefik.http.routers.grafana.tls.certresolver: letsencrypt
     networks:
       - public
       - monitoring
