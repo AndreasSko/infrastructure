@@ -7,7 +7,7 @@ on:
 jobs:
   terraform:
     name: 'Terraform'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -58,8 +58,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt install software-properties-common -y
-        sudo apt-add-repository --yes --update ppa:ansible/ansible
-        sudo apt install ansible -y
+        sudo pip3 install bcrypt
         ansible-galaxy install -r requirements.yml
 
     - name: Write private SSH key
