@@ -33,6 +33,10 @@ services:
       - ./volumes/assets:/flarum/app/public/assets
       - ./volumes/extensions:/flarum/app/extensions
       - ./volumes/nginx:/etc/nginx/conf.d
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.flarum-cron.schedule: "@every 1m" 
+      ofelia.job-exec.flarum-cron.command: "php flarum schedule:run"
     depends_on:
       - mariadb
     networks:
