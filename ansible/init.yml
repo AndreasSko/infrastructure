@@ -34,21 +34,6 @@
 
     - name: Create docker directory
       file:
-        path: /docker/ingress
+        path: /docker
         state: directory
         owner: ubuntu
-        recurse: true
-
-    - name: Upload docker-compose for ingress
-      copy:
-        src: files/ingress/{{ item }}
-        dest: /docker/ingress
-      with_items:
-      - docker-compose.yml
-      - custom.conf
-      - nginx.tmpl
-
-    - name: Start up ingress docker-compose 
-      command: docker-compose up -d
-      args:
-        chdir: /docker/ingress
