@@ -56,6 +56,11 @@ services:
       - MYSQL_PASSWORD=${FLARUM_MYSQL_PASSWORD}
     volumes:
       - ./volumes/mysql/db:/var/lib/mysql
+      - /mnt/b2/backups/flarum:/backups
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.flarum-mariadb-backup.schedule: "@every 12h" 
+      ofelia.job-exec.flarum-mariadb-backup.command: '/bin/bash -c "mysqldump -u $$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE | bzip2 -c > /backups/$$(date +%Y-%m-%dT%H:%M:%S).sql.bz2"'
     networks:
       - flarum 
     logging:

@@ -63,6 +63,11 @@ services:
       - MYSQL_USER=nextcloud
     volumes:
       - ./volumes/mariadb:/var/lib/mysql
+      - /mnt/b2/backups/nextcloud:/backups
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.nextcloud-mariadb-backup.schedule: "@every 12h" 
+      ofelia.job-exec.nextcloud-mariadb-backup.command: '/bin/bash -c "mysqldump -u $$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE | bzip2 -c > /backups/$$(date +%Y-%m-%dT%H:%M:%S).sql.bz2"'
     networks:
       - nextcloud
     logging:
