@@ -14,11 +14,13 @@
     with_items:
       - docker-compose.yml
       - traefik.yml
+    register: files_upload
   
   - name: Template admin_auth.txt
     template:
       src: files/system/admin_auth
       dest: /docker/system/admin_auth
+    register: admin_auth_upload
 
   - name: Start up System docker-compose 
     command: docker-compose up -d
@@ -27,3 +29,10 @@
       chdir: /docker/system
     environment:
       INFLUXDB_INFLUXDB_USER_PASSWORD: "{{ lookup('env','INFLUXDB_INFLUXDB_USER_PASSWORD') }}"
+
+  - name: Restart System docker-compose
+    command: docker-compose restart
+    become: true
+    args:
+      chdir: /docker/system
+    when: files_upload.changed or admin_auth_upload.changed
