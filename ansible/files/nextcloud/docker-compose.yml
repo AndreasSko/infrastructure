@@ -40,6 +40,7 @@ services:
     volumes:
       - ./volumes/nextcloud:/var/www/html
       - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./tuning.ini:/usr/local/etc/php/conf.d/tuning.ini
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.nextcloud-cron.schedule: "@every 5m" 

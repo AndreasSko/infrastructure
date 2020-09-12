@@ -14,6 +14,7 @@
       - docker-compose.yml
       - nginx.conf
       - www.conf
+      - tuning.ini
   - name: Start up Nextcloud docker-compose 
     command: docker-compose up -d
     become: yes
