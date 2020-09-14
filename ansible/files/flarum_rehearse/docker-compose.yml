@@ -11,7 +11,7 @@ services:
       - ./volumes/extensions:/flarum/app/extensions
     labels:
       traefik.enable: "true"
-      traefik.http.routers.flarum-rehearse.rule: "Host(`flarum-rehearse.andreas-sk.de`)"
+      traefik.http.routers.flarum-rehearse.rule: "Host(`flarum-rehearse2.andreas-sk.de`)"
       traefik.http.routers.flarum-rehearse.tls: "true"
       traefik.http.routers.flarum-rehearse.tls.certresolver: letsencrypt
     networks:
