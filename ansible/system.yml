@@ -36,3 +36,7 @@
     args:
       chdir: /docker/system
     when: files_upload.changed or admin_auth_upload.changed
+    
+  - name: Clean up Docker
+    command: docker system prune -af
+    become: true
