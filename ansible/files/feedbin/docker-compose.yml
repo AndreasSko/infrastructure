@@ -13,7 +13,11 @@ services:
       traefik.http.routers.feedbin-web.rule: "Host(`feedbin.andreas-sk.de`)"
       traefik.http.routers.feedbin-web.tls: "true"
       traefik.http.routers.feedbin-web.tls.certresolver: letsencrypt
+      traefik.http.routers.feedbin-web.middlewares: block-feedbin-signup@docker, block-feedbin-users@docker
       traefik.http.services.feedbin-web.loadbalancer.server.port: 3000
+      traefik.http.middlewares.block-feedbin-signup.plugin.blockpath.regex: "^/signup(.*)"
+      traefik.http.middlewares.block-feedbin-users.plugin.blockpath.regex: "^/users(.*)"
+      
     command: bundle exec rails s --port 3000 --binding 0.0.0.0
     restart: always
     mem_limit: 256m
