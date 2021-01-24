@@ -3,6 +3,9 @@ providers:
     exposedByDefault: false
     network: public
 
+log:
+  level: INFO
+
 entryPoints:
   web:
     address: ":80"
