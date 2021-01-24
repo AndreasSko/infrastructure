@@ -32,3 +32,6 @@ metrics:
 
 api:
   dashboard: true
+
+pilot:
+    token: "{{ lookup('env','TRAEFIK_PILOT_TOKEN') }}"
