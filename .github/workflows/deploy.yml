@@ -115,3 +115,19 @@ jobs:
         NEXTCLOUD_OBJECTSTORE_S3_BUCKET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_BUCKET }}
         NEXTCLOUD_OBJECTSTORE_S3_KEY: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_KEY }}
         NEXTCLOUD_OBJECTSTORE_S3_SECRET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_SECRET }}
+
+    - name: Run Feedbin Ansible Playbook
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      working-directory: ansible
+      run: ansible-playbook feedbin.yml -i hosts.yml -v
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false
+        FEEDBIN_AWS_ACCESS_KEY_ID: ${{ secrets.FEEDBIN_AWS_ACCESS_KEY_ID }}
+        FEEDBIN_AWS_S3_BUCKET: ${{ secrets.FEEDBIN_AWS_S3_BUCKET }}
+        FEEDBIN_AWS_SECRET_ACCESS_KEY: ${{ secrets.FEEDBIN_AWS_SECRET_ACCESS_KEY }}
+        FEEDBIN_CAMO_KEY: ${{ secrets.FEEDBIN_CAMO_KEY }}
+        FEEDBIN_ENTRY_IMAGE_HOST: ${{ secrets.FEEDBIN_ENTRY_IMAGE_HOST }}
+        FEEDBIN_EXTRACT_SECRET: ${{ secrets.FEEDBIN_EXTRACT_SECRET }}
+        FEEDBIN_EXTRACT_USER: ${{ secrets.FEEDBIN_EXTRACT_USER }}
+        FEEDBIN_POSTGRES_PASSWORD: ${{ secrets.FEEDBIN_POSTGRES_PASSWORD }}
+        FEEDBIN_SECRET_KEY: ${{ secrets.FEEDBIN_SECRET_KEY }}

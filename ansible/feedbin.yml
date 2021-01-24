@@ -1,0 +1,36 @@
+- hosts: all
+  tasks:
+  - name: Create Feedbin directory
+    file:
+      path: /docker/feedbin
+      state: directory
+      owner: ubuntu
+    become: true
+
+  - name: Upload all files
+    copy:
+      src: files/feedbin/{{ item }}
+      dest: /docker/feedbin
+    with_items:
+      - docker-compose.yml
+
+  - name: Template .env
+    template:
+      src: files/feedbin/.env
+      dest: /docker/feedbin/.env
+
+  - name: Start up Feedbin docker-compose 
+    command: docker-compose up -d
+    become: yes
+    args:
+      chdir: /docker/feedbin
+    environment:
+      FEEDBIN_AWS_ACCESS_KEY_ID: "{{ lookup('env','FEEDBIN_AWS_ACCESS_KEY_ID') }}"
+      FEEDBIN_AWS_S3_BUCKET: "{{ lookup('env','FEEDBIN_AWS_S3_BUCKET') }}"
+      FEEDBIN_AWS_SECRET_ACCESS_KEY: "{{ lookup('env','FEEDBIN_AWS_SECRET_ACCESS_KEY') }}"
+      FEEDBIN_CAMO_KEY: "{{ lookup('env','FEEDBIN_CAMO_KEY') }}"
+      FEEDBIN_ENTRY_IMAGE_HOST: "{{ lookup('env','FEEDBIN_ENTRY_IMAGE_HOST') }}"
+      FEEDBIN_EXTRACT_SECRET: "{{ lookup('env','FEEDBIN_EXTRACT_SECRET') }}"
+      FEEDBIN_EXTRACT_USER: "{{ lookup('env','FEEDBIN_EXTRACT_USER') }}"
+      FEEDBIN_POSTGRES_PASSWORD: "{{ lookup('env','FEEDBIN_POSTGRES_PASSWORD') }}"
+      FEEDBIN_SECRET_KEY: "{{ lookup('env','FEEDBIN_SECRET_KEY') }}"
