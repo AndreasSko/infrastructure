@@ -34,4 +34,10 @@ api:
   dashboard: true
 
 pilot:
-    token: "{{ lookup('env','TRAEFIK_PILOT_TOKEN') }}"
+  token: "{{ lookup('env','TRAEFIK_PILOT_TOKEN') }}"
+
+experimental:
+  plugins:
+    blockpath:
+      moduleName: "github.com/traefik/plugin-blockpath"
+      version: "v0.2.1"
