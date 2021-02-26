@@ -137,8 +137,13 @@ services:
      - ./.env
     volumes:
       - ./volumes/postgres:/var/lib/postgresql/data
+      - /mnt/b2/backups/feedbin:/backups
     restart: always
     mem_limit: 512m
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.feedbin-psql-backup.schedule: "@every 1w" 
+      ofelia.job-exec.feedbin-psql-backup.command: '/bin/bash -c "pg_dump -U $$POSTGRES_USERNAME -d feedbin_production | bzip2 -c > /backups/$$(date +%Y-%m-%dT%H:%M:%S).sql.bz2"'
     networks:
       - feedbin
     logging:
