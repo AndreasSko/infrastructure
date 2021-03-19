@@ -20,8 +20,7 @@ services:
       
     command: bundle exec rails s --port 3000 --binding 0.0.0.0
     restart: always
-    mem_limit: 750m
-    mem_swappiness: 10
+    mem_limit: 1G
     networks:
       - public
       - feedbin
@@ -34,7 +33,7 @@ services:
      - ./.env
     command: foreman start
     restart: always
-    mem_limit: 256m
+    mem_limit: 400m
     mem_swappiness: 100
     networks:
       - feedbin
