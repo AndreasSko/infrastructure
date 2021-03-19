@@ -132,3 +132,10 @@ jobs:
         FEEDBIN_EXTRACT_USER: ${{ secrets.FEEDBIN_EXTRACT_USER }}
         FEEDBIN_POSTGRES_PASSWORD: ${{ secrets.FEEDBIN_POSTGRES_PASSWORD }}
         FEEDBIN_SECRET_KEY: ${{ secrets.FEEDBIN_SECRET_KEY }}
+
+    - name: Run cleanup Ansible Playbook
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      working-directory: ansible
+      run: ansible-playbook cleanup.yml -i hosts.yml -v
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false

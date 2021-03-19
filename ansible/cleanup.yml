@@ -1,0 +1,15 @@
+- hosts: all
+  tasks:    
+  - name: Clean up Docker
+    command: docker system prune -af
+    become: true
+
+  - name: Clean up apt
+    apt:
+      autoremove: true
+      autoclean: true
+    become: true
+
+  - name: Clean up Journal
+    command: journalctl --vacuum-time=14d
+    become: true
