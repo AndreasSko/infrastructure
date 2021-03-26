@@ -18,7 +18,7 @@ services:
       traefik.http.middlewares.block-feedbin-signup.plugin.blockpath.regex: "^/signup(.*)"
       traefik.http.middlewares.block-feedbin-users.plugin.blockpath.regex: "^/users(.*)"
       
-    command: bundle exec rails s --port 3000 --binding 0.0.0.0
+    command: bash -c "rm -rf /app/tmp/* && bundle exec rails s --port 3000 --binding 0.0.0.0"
     restart: always
     mem_limit: 1G
     networks:
@@ -33,7 +33,7 @@ services:
      - ./.env
     command: foreman start
     restart: always
-    mem_limit: 400m
+    mem_limit: 600m
     mem_swappiness: 100
     networks:
       - feedbin
