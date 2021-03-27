@@ -3,7 +3,7 @@ version: '2.2'
 services:
 
   feedbin-web:
-    image: andreassko/feedbin-web
+    image: andreassko/feedbin-web:alpine
     environment:
       PORT: 3000
     env_file:
@@ -18,7 +18,7 @@ services:
       traefik.http.middlewares.block-feedbin-signup.plugin.blockpath.regex: "^/signup(.*)"
       traefik.http.middlewares.block-feedbin-users.plugin.blockpath.regex: "^/users(.*)"
       
-    command: bash -c "rm -rf /app/tmp/* && bundle exec rails s --port 3000 --binding 0.0.0.0"
+    command: sh -c "rm -rf /app/tmp/* && bundle exec rails s --port 3000 --binding 0.0.0.0"
     restart: always
     mem_limit: 1G
     networks:
@@ -28,7 +28,7 @@ services:
       driver: local
 
   feedbin-workers:
-    image: andreassko/feedbin-web
+    image: andreassko/feedbin-web:alpine
     env_file:
      - ./.env
     command: foreman start
