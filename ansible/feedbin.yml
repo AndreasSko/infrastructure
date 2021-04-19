@@ -19,6 +19,12 @@
       src: files/feedbin/.env
       dest: /docker/feedbin/.env
 
+  - name: Pull Feedbin images
+    command: docker-compose pull
+    become: yes
+    args:
+      chdir: /docker/feedbin
+
   - name: Start up Feedbin docker-compose 
     command: docker-compose up -d
     become: yes
