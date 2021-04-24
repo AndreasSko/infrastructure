@@ -43,7 +43,7 @@ jobs:
 
 
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: terraform        
       run: terraform apply -auto-approve 
       env:
@@ -56,7 +56,7 @@ jobs:
         TF_VAR_workstation_ssh_pub_key: ${{ secrets.WORKSTATION_SSH_PUB_KEY }}
     
     - name: Setup Ansible & install requirements from Ansible Galaxy
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: ansible
       run: |
         sudo apt update
@@ -65,20 +65,20 @@ jobs:
         ansible-galaxy install -r requirements.yml
 
     - name: Write private SSH key
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       run: |
        echo "${{ secrets.SSH_PRIV_KEY }}" > ./ansible/key.pem
        chmod 0600 ./ansible/key.pem
     
     - name: Run initial Ansible Playbook
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: ansible
       run: ansible-playbook init.yml -i hosts.yml -v
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
 
     - name: Run B2 Ansible Playbook
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: ansible
       run: ansible-playbook b2.yml -i hosts.yml -v
       env:
@@ -88,7 +88,7 @@ jobs:
         B2_SECRET: ${{ secrets.B2_SECRET }}
 
     - name: Run System Ansible Playbook
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: ansible
       run: ansible-playbook system.yml -i hosts.yml -v
       env:
@@ -97,7 +97,7 @@ jobs:
         TRAEFIK_PILOT_TOKEN: ${{ secrets.TRAEFIK_PILOT_TOKEN }}
 
     - name: Run Monitoring Ansible Playbook
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: ansible
       run: ansible-playbook monitoring.yml -i hosts.yml -v
       env:
@@ -106,7 +106,7 @@ jobs:
         INFLUXDB_INFLUXDB_USER_PASSWORD: ${{ secrets.INFLUXDB_INFLUXDB_USER_PASSWORD }}
 
     - name: Run Nextcloud Ansible Playbook
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: ansible
       run: ansible-playbook nextcloud.yml -i hosts.yml -v
       env:
@@ -118,7 +118,7 @@ jobs:
         NEXTCLOUD_OBJECTSTORE_S3_SECRET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_SECRET }}
 
     - name: Run Feedbin Ansible Playbook
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: ansible
       run: ansible-playbook feedbin.yml -i hosts.yml -v
       env:
@@ -135,7 +135,7 @@ jobs:
         FEEDBIN_SECRET_KEY: ${{ secrets.FEEDBIN_SECRET_KEY }}
 
     - name: Run cleanup Ansible Playbook
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master'
       working-directory: ansible
       run: ansible-playbook cleanup.yml -i hosts.yml -v
       env:
