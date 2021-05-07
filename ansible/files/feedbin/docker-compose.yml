@@ -41,7 +41,7 @@ services:
       driver: local
 
   feedbin-elasticsearch:
-    image: elasticsearch:2.4-alpine
+    image: elasticsearch:5.6-alpine
     hostname: elasticsearch
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
