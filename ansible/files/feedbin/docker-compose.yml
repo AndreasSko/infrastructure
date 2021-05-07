@@ -117,7 +117,7 @@ services:
       driver: local
 
   feedbin-redis:
-    image: redis:5-alpine
+    image: redis:6-alpine
     hostname: feedbin-redis
     command: "redis-server --appendonly yes"
     volumes:
