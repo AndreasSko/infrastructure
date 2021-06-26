@@ -9,7 +9,7 @@ terraform {
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "2.21.0"
+      version = "2.22.0"
     }
   }
   required_version = ">= 0.13"
