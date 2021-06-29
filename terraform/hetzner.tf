@@ -1,7 +1,7 @@
 resource "hcloud_server" "andreas_sk" {
   name        = "andreas-sk"
   image       = data.hcloud_image.ubuntu_2004.name
-  server_type = "cx11"
+  server_type = "cpx11"
   location    = var.hcloud_location
   ssh_keys = [
     "askorczyk@Andreass-MacBook-Pro.local",
