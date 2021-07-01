@@ -14,6 +14,14 @@ resource "cloudflare_record" "nextcloud" {
   ttl     = 120
 }
 
+resource "cloudflare_record" "ocis" {
+  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
+  name    = "ocis.andreas-sk.de"
+  value   = hcloud_server.andreas_sk.ipv4_address
+  type    = "A"
+  ttl     = 120
+}
+
 resource "cloudflare_record" "monitoring" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "monitoring.andreas-sk.de"

@@ -1,0 +1,25 @@
+- hosts: all
+  tasks:
+  - name: Create ocis directory
+    file:
+      path: /docker/ocis
+      state: directory
+      owner: ubuntu
+    become: true
+
+  - name: Upload all files
+    copy:
+      src: files/ocis/{{ item }}
+      dest: /docker/ocis
+    with_items:
+      - docker-compose.yml
+
+  - name: Start up ocis docker-compose 
+    command: docker-compose up -d
+    become: yes
+    args:
+      chdir: /docker/ocis
+    environment:
+      OCIS_S3_ACCESS_KEY: "{{ lookup('env','OCIS_S3_ACCESS_KEY') }}"
+      OCIS_S3_SECRET_KEY: "{{ lookup('env','OCIS_S3_SECRET_KEY') }}"
+      OCIS_S3_BUCKET: "{{ lookup('env','OCIS_S3_BUCKET') }}"
