@@ -34,14 +34,14 @@ resource "cloudflare_record" "feedbin" {
 resource "cloudflare_record" "feedbin-mx" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "feedbin.andreas-sk.de"
-  value   = "mx.sendgrid.net."
+  value   = "mx.sendgrid.net"
   type    = "MX"
 }
 
 resource "cloudflare_record" "feedbin-sendgrid-mx1" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "em669.feedbin.andreas-sk.de"
-  value   = "mx.sendgrid.net."
+  value   = "mx.sendgrid.net"
   type    = "MX"
 }
 
