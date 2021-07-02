@@ -20,6 +20,7 @@
     args:
       chdir: /docker/ocis
     environment:
+      HOME_IP: "{{ lookup('env','HOME_IP') }}"
       OCIS_S3_ACCESS_KEY: "{{ lookup('env','OCIS_S3_ACCESS_KEY') }}"
       OCIS_S3_SECRET_KEY: "{{ lookup('env','OCIS_S3_SECRET_KEY') }}"
       OCIS_S3_BUCKET: "{{ lookup('env','OCIS_S3_BUCKET') }}"

@@ -23,6 +23,8 @@ services:
       traefik.http.routers.ocis.rule: "Host(`ocis.andreas-sk.de`)"
       traefik.http.routers.ocis.tls: "true"
       traefik.http.routers.ocis.tls.certresolver: letsencrypt
+      traefik.http.routers.ocis.middlewares: whitelist-home@docker
+      traefik.http.middlewares.whitelist-home.ipwhitelist.sourcerange: ${HOME_IP}
     networks:
       - public
     logging:
