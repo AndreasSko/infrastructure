@@ -4,7 +4,6 @@ services:
     image: owncloud/ocis:1.8.0
     environment:
       OCIS_URL: https://ocis.andreas-sk.de
-      OCIS_LOG_LEVEL: debug
       PROXY_TLS: "false"
       STORAGE_HOME_DRIVER: s3ng
       STORAGE_USERS_DRIVER: s3ng
@@ -15,6 +14,8 @@ services:
       STORAGE_DRIVER_S3NG_ACCESS_KEY: ${OCIS_S3_ACCESS_KEY}
       STORAGE_DRIVER_S3NG_SECRET_KEY: ${OCIS_S3_SECRET_KEY}
       STORAGE_DRIVER_S3NG_BUCKET: ${OCIS_S3_BUCKET}
+      # Storage Frontend
+      STORAGE_FRONTEND_UPLOAD_MAX_CHUNK_SIZE: 1000000 # <100MB
     volumes:
       - ./volumes/ocis:/var/tmp/ocis
     labels:
