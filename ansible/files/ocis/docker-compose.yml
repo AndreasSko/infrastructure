@@ -2,9 +2,15 @@ version: "3.7"
 services:
   ocis:
     image: owncloud/ocis:1.8.0
+    entrypoint:
+      - /bin/sh
+      - /entrypoint.sh
     environment:
-      OCIS_URL: https://ocis.andreas-sk.de
       PROXY_TLS: "false"
+      OCIS_URL: https://ocis.andreas-sk.de
+      OCIS_JWT_SECRET: ${OCIS_JWT_SECRET}
+      IDP_LDAP_BIND_PASSWORD: ${IDP_LDAP_BIND_PASSWORD}
+      STORAGE_LDAP_BIND_PASSWORD: ${STORAGE_LDAP_BIND_PASSWORD}
       STORAGE_HOME_DRIVER: s3ng
       STORAGE_USERS_DRIVER: s3ng
       STORAGE_METADATA_DRIVER: ocis # keep metadata on ocis storage since this are only small files atm
@@ -18,6 +24,7 @@ services:
       STORAGE_FRONTEND_UPLOAD_MAX_CHUNK_SIZE: 1000000 # <100MB
     volumes:
       - ./volumes/ocis:/var/tmp/ocis
+      - ./entrypoint.sh:/entrypoint.sh
     labels:
       traefik.enable: "true"
       traefik.http.routers.ocis.rule: "Host(`ocis.andreas-sk.de`)"

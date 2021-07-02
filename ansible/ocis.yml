@@ -13,6 +13,7 @@
       dest: /docker/ocis
     with_items:
       - docker-compose.yml
+      - entrypoint.sh
 
   - name: Start up ocis docker-compose 
     command: docker-compose up -d
@@ -24,3 +25,6 @@
       OCIS_S3_ACCESS_KEY: "{{ lookup('env','OCIS_S3_ACCESS_KEY') }}"
       OCIS_S3_SECRET_KEY: "{{ lookup('env','OCIS_S3_SECRET_KEY') }}"
       OCIS_S3_BUCKET: "{{ lookup('env','OCIS_S3_BUCKET') }}"
+      IDP_LDAP_BIND_PASSWORD: "{{ lookup('env','IDP_LDAP_BIND_PASSWORD') }}"
+      STORAGE_LDAP_BIND_PASSWORD: "{{ lookup('env','STORAGE_LDAP_BIND_PASSWORD') }}"
+      OCIS_JWT_SECRET: "{{ lookup('env','OCIS_JWT_SECRET') }}"
