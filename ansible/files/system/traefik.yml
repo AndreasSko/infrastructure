@@ -6,6 +6,8 @@ providers:
 log:
   level: INFO
 
+accessLog: {}
+
 entryPoints:
   web:
     address: ":80"
