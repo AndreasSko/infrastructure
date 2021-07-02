@@ -20,7 +20,7 @@ services:
       driver: local
   
   nextcloud:
-    image: nextcloud:21.0.2-fpm
+    image: nextcloud:21.0.3-fpm
     container_name: nextcloud
     hostname: nextcloud
     restart: always
