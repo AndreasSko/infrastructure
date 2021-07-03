@@ -22,7 +22,7 @@ services:
       STORAGE_DRIVER_S3NG_SECRET_KEY: ${OCIS_S3_SECRET_KEY}
       STORAGE_DRIVER_S3NG_BUCKET: ${OCIS_S3_BUCKET}
       # Storage Frontend
-      STORAGE_FRONTEND_UPLOAD_MAX_CHUNK_SIZE: 1000000 # <100MB
+      STORAGE_FRONTEND_UPLOAD_MAX_CHUNK_SIZE: 100000000 # <100MB
     volumes:
       - ./volumes/ocis:/var/tmp/ocis
       - ./entrypoint.sh:/entrypoint.sh
