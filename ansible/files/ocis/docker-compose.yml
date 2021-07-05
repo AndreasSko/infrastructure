@@ -7,6 +7,7 @@ services:
       - /bin/sh
       - /entrypoint.sh
     environment:
+      LOG_LEVEL: debug
       PROXY_TLS: "false"
       OCIS_URL: https://ocis.andreas-sk.de
       OCIS_JWT_SECRET: ${OCIS_JWT_SECRET}
