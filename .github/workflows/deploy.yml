@@ -105,18 +105,6 @@ jobs:
         INFLUXDB_INFLUXDB_ADMIN_PASSWORD: ${{ secrets.INFLUXDB_INFLUXDB_ADMIN_PASSWORD }}
         INFLUXDB_INFLUXDB_USER_PASSWORD: ${{ secrets.INFLUXDB_INFLUXDB_USER_PASSWORD }}
 
-    - name: Run Nextcloud Ansible Playbook
-      if: github.ref == 'refs/heads/master'
-      working-directory: ansible
-      run: ansible-playbook nextcloud.yml -i hosts.yml -v
-      env:
-        ANSIBLE_HOST_KEY_CHECKING: false
-        NEXTCLOUD_MYSQL_ROOT_PASSWORD: ${{ secrets.NEXTCLOUD_MYSQL_ROOT_PASSWORD }}
-        NEXTCLOUD_MYSQL_PASSWORD: ${{ secrets.NEXTCLOUD_MYSQL_PASSWORD }}
-        NEXTCLOUD_OBJECTSTORE_S3_BUCKET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_BUCKET }}
-        NEXTCLOUD_OBJECTSTORE_S3_KEY: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_KEY }}
-        NEXTCLOUD_OBJECTSTORE_S3_SECRET: ${{ secrets.NEXTCLOUD_OBJECTSTORE_S3_SECRET }}
-
     - name: Run Ocis Ansible Playbook
       if: github.ref == 'refs/heads/master'
       working-directory: ansible
