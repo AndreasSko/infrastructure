@@ -118,6 +118,7 @@ jobs:
         IDP_LDAP_BIND_PASSWORD: ${{ secrets.IDP_LDAP_BIND_PASSWORD }}
         STORAGE_LDAP_BIND_PASSWORD: ${{ secrets.STORAGE_LDAP_BIND_PASSWORD }}
         OCIS_JWT_SECRET: ${{ secrets.OCIS_JWT_SECRET }}
+        OCIS_TRANSFER_SECRET: ${{ secrets.OCIS_TRANSFER_SECRET }}
 
     - name: Run Feedbin Ansible Playbook
       if: github.ref == 'refs/heads/master'
