@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   ocis:
-    image: andreassko/ocis:latest
+    image: owncloud/ocis:1.10.0
     restart: always
     entrypoint:
       - /bin/sh
