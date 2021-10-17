@@ -29,3 +29,4 @@
       STORAGE_LDAP_BIND_PASSWORD: "{{ lookup('env','STORAGE_LDAP_BIND_PASSWORD') }}"
       OCIS_JWT_SECRET: "{{ lookup('env','OCIS_JWT_SECRET') }}"
       OCIS_TRANSFER_SECRET: "{{ lookup('env', 'OCIS_TRANSFER_SECRET') }}"
+      OCIS_MACHINE_AUTH_API_KEY: "{{ lookup('env', 'OCIS_MACHINE_AUTH_API_KEY') }}"
