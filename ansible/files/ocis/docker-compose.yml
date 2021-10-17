@@ -20,11 +20,11 @@ services:
       STORAGE_USERS_DRIVER: s3ng
       STORAGE_METADATA_DRIVER: ocis # keep metadata on ocis storage since this are only small files atm
       # s3ng specific settings
-      STORAGE_DRIVER_S3NG_ENDPOINT: https://s3.eu-central-003.backblazeb2.com
-      STORAGE_DRIVER_S3NG_REGION: eu-central-003
-      STORAGE_DRIVER_S3NG_ACCESS_KEY: ${OCIS_S3_ACCESS_KEY}
-      STORAGE_DRIVER_S3NG_SECRET_KEY: ${OCIS_S3_SECRET_KEY}
-      STORAGE_DRIVER_S3NG_BUCKET: ${OCIS_S3_BUCKET}
+      STORAGE_USERS_DRIVER_S3NG_ENDPOINT: https://s3.eu-central-003.backblazeb2.com
+      STORAGE_USERS_DRIVER_S3NG_REGION: eu-central-003
+      STORAGE_USERS_DRIVER_S3NG_ACCESS_KEY: ${OCIS_S3_ACCESS_KEY}
+      STORAGE_USERS_DRIVER_S3NG_SECRET_KEY: ${OCIS_S3_SECRET_KEY}
+      STORAGE_USERS_DRIVER_S3NG_BUCKET: ${OCIS_S3_BUCKET}
       # Storage Frontend
       STORAGE_FRONTEND_UPLOAD_MAX_CHUNK_SIZE: 100000000 # <100MB
     volumes:
