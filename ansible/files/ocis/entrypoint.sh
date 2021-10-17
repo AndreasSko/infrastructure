@@ -1,7 +1,9 @@
 #!/bin/sh
 
 set -e
-
+# Debugging permission issues
+ls -l /var/tmp/ocis
+touch /var/tmp/ocis/can-touch-it
 ocis server&
 
 # Not functional right now, see https://github.com/owncloud/ocis/issues/1601
