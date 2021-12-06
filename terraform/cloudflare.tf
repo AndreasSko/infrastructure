@@ -6,6 +6,15 @@ resource "cloudflare_record" "hetzner" {
   ttl     = 120
 }
 
+
+resource "cloudflare_record" "one-blu" {
+  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
+  name    = "1blu"
+  value   = "v31671.1blu.de"
+  type    = "CNAME"
+  ttl     = 120
+}
+
 resource "cloudflare_record" "nextcloud" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "nextcloud.andreas-sk.de"
