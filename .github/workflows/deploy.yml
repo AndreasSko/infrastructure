@@ -37,7 +37,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
         TF_VAR_ssh_pub_key: ${{ secrets.SSH_PUB_KEY }}
         TF_VAR_workstation_ssh_pub_key: ${{ secrets.WORKSTATION_SSH_PUB_KEY }}
 
@@ -51,7 +50,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
         TF_VAR_ssh_pub_key: ${{ secrets.SSH_PUB_KEY }}
         TF_VAR_workstation_ssh_pub_key: ${{ secrets.WORKSTATION_SSH_PUB_KEY }}
     

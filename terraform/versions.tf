@@ -1,8 +1,5 @@
 terraform {
   required_providers {
-    hcloud = {
-      source = "hetznercloud/hcloud"
-    }
     aws = {
       source  = "hashicorp/aws"
       version = "3.58.0"
