@@ -11,7 +11,7 @@ resource "cloudflare_record" "ocis" {
   name    = "ocis.andreas-sk.de"
   value   = cloudflare_record.one-blu.hostname
   type    = "CNAME"
-  ttl     = 120
+  proxied = true
 }
 
 resource "cloudflare_record" "monitoring" {
