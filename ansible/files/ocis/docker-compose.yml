@@ -13,7 +13,6 @@ services:
       OCIS_JWT_SECRET: ${OCIS_JWT_SECRET}
       OCIS_TRANSFER_SECRET: ${OCIS_TRANSFER_SECRET}
       OCIS_MACHINE_AUTH_API_KEY: ${OCIS_MACHINE_AUTH_API_KEY}
-      OCIS_BASE_DATA_PATH: /var/tmp/ocis
       IDP_LDAP_BIND_PASSWORD: ${IDP_LDAP_BIND_PASSWORD}
       IDP_ACCESS_TOKEN_EXPIRATION: 86400 # 24h
       IDP_ID_TOKEN_EXPIRATION: 86400 # 24h
@@ -30,7 +29,7 @@ services:
       # Storage Frontend
       STORAGE_FRONTEND_UPLOAD_MAX_CHUNK_SIZE: 100000000 # 100MB
     volumes:
-      - ./volumes/ocis:/var/tmp/ocis
+      - ./volumes/ocis:/var/lib/ocis
       - ./entrypoint.sh:/entrypoint.sh
     labels:
       traefik.enable: "true"
