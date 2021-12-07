@@ -4,6 +4,7 @@ set -e
 # Debugging permission issues
 ls -l /var/tmp/ocis
 touch /var/tmp/ocis/can-touch-it
+sleep inf
 ocis server&
 
 # Not functional right now, see https://github.com/owncloud/ocis/issues/1601
