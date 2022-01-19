@@ -36,3 +36,6 @@
       INFLUXDB_INFLUXDB_ADMIN_PASSWORD: "{{ lookup('env','INFLUXDB_INFLUXDB_ADMIN_PASSWORD') }}"
       INFLUXDB_INFLUXDB_USER_PASSWORD: "{{ lookup('env','INFLUXDB_INFLUXDB_USER_PASSWORD') }}"
       
+  - name: Allow Traefik access to docker.sock
+    command: docker exec --user root telegraf chmod 666 /var/run/docker.sock
+    become: true
