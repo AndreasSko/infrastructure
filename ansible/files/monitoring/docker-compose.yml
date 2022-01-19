@@ -45,7 +45,7 @@ services:
       driver: local
 
   grafana:
-    image: grafana/grafana:8.3.3
+    image: grafana/grafana:8.3.4
     hostname: grafana
     container_name: grafana
     restart: always
