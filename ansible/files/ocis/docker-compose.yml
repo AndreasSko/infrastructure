@@ -39,9 +39,7 @@ services:
       traefik.http.middlewares.whitelist-home.ipwhitelist.sourcerange: ${HOME_IP}
     networks:
       - public
-    logging:
-      driver: local
-
+    
 networks:
   public:
     name: public

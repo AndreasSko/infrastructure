@@ -24,9 +24,7 @@ services:
     networks:
       - public
       - feedbin
-    logging:
-      driver: local
-
+    
   feedbin-workers:
     image: andreassko/feedbin-web:alpine
     env_file:
@@ -37,9 +35,7 @@ services:
     mem_swappiness: 100
     networks:
       - feedbin
-    logging:
-      driver: local
-
+    
   feedbin-elasticsearch:
     image: elasticsearch:2.4-alpine
     hostname: elasticsearch
@@ -59,9 +55,7 @@ services:
     restart: always
     networks:
       - feedbin
-    logging:
-      driver: local
-
+    
   feedbin-refresher:
     image: andreassko/feedbin-refresher
     env_file:
@@ -71,9 +65,7 @@ services:
     mem_swappiness: 100
     networks:
       - feedbin
-    logging:
-      driver: local
-
+    
   feedbin-image:
     image: andreassko/feedbin-image
     env_file:
@@ -83,9 +75,7 @@ services:
     mem_swappiness: 100
     networks:
       - feedbin
-    logging:
-      driver: local
-
+    
   camo:
     image: increments/camo
     environment:
@@ -103,9 +93,7 @@ services:
     networks:
       - public
       - feedbin
-    logging:
-      driver: local
-
+    
   feedbin-memcached:
     hostname: memcached
     image: memcached:1.6-alpine
@@ -113,9 +101,7 @@ services:
     mem_limit: 128m
     networks:
       - feedbin
-    logging:
-      driver: local
-
+    
   feedbin-redis:
     image: redis:5-alpine
     hostname: feedbin-redis
@@ -126,9 +112,7 @@ services:
     mem_limit: 128m
     networks:
       - feedbin
-    logging:
-      driver: local
-
+    
   feedbin-postgres:
     image: postgres:13-alpine
     hostname: postgres
@@ -145,9 +129,7 @@ services:
       ofelia.job-exec.feedbin-psql-backup.command: '/bin/bash -c "pg_dump -U $$POSTGRES_USERNAME -d feedbin_production | bzip2 -c > /backups/$$(date +%Y-%m-%dT%H:%M:%S).sql.bz2"'
     networks:
       - feedbin
-    logging:
-      driver: local
-
+    
   feedbin-extract:
     hostname: feedbin-extract
     image: andreassko/feedbin-extract
@@ -165,9 +147,7 @@ services:
     networks:
       - public
       - feedbin
-    logging:
-      driver: local
-
+    
 networks:
   feedbin:
   public:

@@ -22,9 +22,7 @@ services:
     networks:
       - monitoring
       - public
-    logging:
-      driver: local
-
+    
   influxdb:
     image: influxdb:1.8-alpine
     hostname: influxdb
@@ -41,9 +39,7 @@ services:
       - ./volumes/influxdb/var/lib/influxdb:/var/lib/influxdb
     networks:
       - monitoring
-    logging:
-      driver: local
-
+    
   grafana:
     image: grafana/grafana:8.3.4
     hostname: grafana
@@ -66,9 +62,7 @@ services:
     networks:
       - public
       - monitoring
-    logging:
-      driver: local
-
+    
 networks:
   monitoring:
     name: monitoring

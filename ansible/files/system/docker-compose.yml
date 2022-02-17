@@ -25,9 +25,7 @@ services:
     restart: always
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
-    logging:
-      driver: local
-
+    
 networks:
   public:
     name: public
