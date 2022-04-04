@@ -41,7 +41,7 @@ services:
       - monitoring
     
   grafana:
-    image: grafana/grafana:8.4.4
+    image: grafana/grafana:8.4.5
     hostname: grafana
     container_name: grafana
     restart: always
