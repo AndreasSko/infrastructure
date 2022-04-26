@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   telegraf:
-    image: telegraf:1.22.1-alpine
+    image: telegraf:1.22.2-alpine
     container_name: telegraf
     restart: always
     environment:
