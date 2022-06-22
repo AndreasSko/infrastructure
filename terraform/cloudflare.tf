@@ -39,25 +39,28 @@ resource "cloudflare_record" "feedbin-mx" {
   type    = "MX"
 }
 
-resource "cloudflare_record" "feedbin-sendgrid-mx1" {
+resource "cloudflare_record" "feedbin-sendgrid-cname-1" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
-  name    = "em669.feedbin.andreas-sk.de"
-  value   = "mx.sendgrid.net"
-  type    = "MX"
+  name    = "em3388.feedbin.andreas-sk.de"
+  value   = "u27579616.wl117.sendgrid.net"
+  type    = "CNAME"
+  proxied = false
 }
 
-resource "cloudflare_record" "feedbin-sendgrid-txt1" {
+resource "cloudflare_record" "feedbin-sendgrid-cname-2" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
-  name    = "em669.feedbin.andreas-sk.de"
-  value   = "v=spf1 include:sendgrid.net ~all"
-  type    = "TXT"
+  name    = "s1._domainkey.feedbin.andreas-sk.de"
+  value   = "s1.domainkey.u27579616.wl117.sendgrid.net"
+  type    = "CNAME"
+  proxied = false
 }
 
-resource "cloudflare_record" "feedbin-sendgrid-txt2" {
+resource "cloudflare_record" "feedbin-sendgrid-cname-3" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
-  name    = "m1._domainkey.feedbin.andreas-sk.de"
-  value   = "k=rsa; t=s; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDDmq/dVRkjJ5UfbZLlK4pMxkuifhrgpG4zkm4T1VwAuyUiSQFI7V5qDM9lDRnHEl6kWy2+UsOSAVzVYynawWLd28AkFl0a6i/oK79PQZFCAy+Dtfbjca8FBXVdX/10c7oFToFmu/XeuCYlZ4cCtTi1D7TQy8T+EXMVd+YQOXu3QIDAQAB"
-  type    = "TXT"
+  name    = "s2._domainkey.feedbin.andreas-sk.de"
+  value   = "s2.domainkey.u27579616.wl117.sendgrid.net"
+  type    = "CNAME"
+  proxied = false
 }
 
 resource "cloudflare_record" "camo-feedbin" {
