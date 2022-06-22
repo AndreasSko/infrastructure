@@ -44,6 +44,7 @@ resource "cloudflare_record" "sendgrid-mx-1" {
   name    = "em4241.andreas-sk.de"
   value   = "mx.sendgrid.net"
   type    = "MX"
+  ttl     = 120
 }
 
 resource "cloudflare_record" "sendgrid-txt-1" {
