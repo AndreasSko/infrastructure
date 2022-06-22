@@ -39,6 +39,27 @@ resource "cloudflare_record" "feedbin-mx" {
   type    = "MX"
 }
 
+resource "cloudflare_record" "sendgrid-mx-1" {
+  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
+  name    = "em4241.andreas-sk.de"
+  value   = "mx.sendgrid.net."
+  type    = "MX"
+}
+
+resource "cloudflare_record" "sendgrid-txt-1" {
+  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
+  name    = "em4241.andreas-sk.de"
+  value   = "v=spf1 include:sendgrid.net ~all"
+  type    = "TXT"
+}
+
+resource "cloudflare_record" "sendgrid-txt-2" {
+  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
+  name    = "m1._domainkey.andreas-sk.de"
+  value   = "k=rsa; t=s; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqlTMS9aIEBCk2IdrGRSP6r9DMREeY8Q7Rw9zYU4sqYm1rDSDmepYTIWgU8mMOQuo+VewvVJ9ZNgrizgIa1FJr2XV2FQxQkI//mz1QtEJ7fAbdlySRKa9HHK2M3tEbb0Lxf2sSCEvQxvV8TUQx+bLbbp5qsEGjYGtnLCymP4yUjwIDAQAB"
+  type    = "TXT"
+}
+
 resource "cloudflare_record" "feedbin-sendgrid-cname-1" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "em3388.feedbin.andreas-sk.de"
