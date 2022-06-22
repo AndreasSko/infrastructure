@@ -42,7 +42,7 @@ resource "cloudflare_record" "feedbin-mx" {
 resource "cloudflare_record" "sendgrid-mx-1" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "em4241.andreas-sk.de"
-  value   = "mx.sendgrid.net."
+  value   = "mx.sendgrid.net"
   type    = "MX"
 }
 
