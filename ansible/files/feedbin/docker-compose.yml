@@ -66,16 +66,6 @@ services:
     networks:
       - feedbin
     
-  feedbin-image:
-    image: andreassko/feedbin-image
-    env_file:
-      - ./.env
-    restart: always
-    mem_limit: 128m
-    mem_swappiness: 100
-    networks:
-      - feedbin
-    
   camo:
     image: increments/camo
     environment:
