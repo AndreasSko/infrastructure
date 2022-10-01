@@ -17,7 +17,7 @@ resource "cloudflare_record" "oracle" {
 resource "cloudflare_record" "monitoring" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "monitoring.andreas-sk.de"
-  value   = cloudflare_record.one-blu.hostname
+  value   = cloudflare_record.oracle.hostname
   type    = "CNAME"
   proxied = true
 }
@@ -26,7 +26,7 @@ resource "cloudflare_record" "monitoring" {
 resource "cloudflare_record" "feedbin" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "feedbin.andreas-sk.de"
-  value   = cloudflare_record.one-blu.hostname
+  value   = cloudflare_record.oracle.hostname
   type    = "CNAME"
   proxied = true
 }
@@ -65,7 +65,7 @@ resource "cloudflare_record" "feedbin-sendgrid-cname-3" {
 resource "cloudflare_record" "camo-feedbin" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "camo-feedbin.andreas-sk.de"
-  value   = cloudflare_record.one-blu.hostname
+  value   = cloudflare_record.oracle.hostname
   type    = "CNAME"
   proxied = true
 }
@@ -73,7 +73,7 @@ resource "cloudflare_record" "camo-feedbin" {
 resource "cloudflare_record" "extract-feedbin" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "extract-feedbin.andreas-sk.de"
-  value   = cloudflare_record.one-blu.hostname
+  value   = cloudflare_record.oracle.hostname
   type    = "CNAME"
   proxied = true
 }
