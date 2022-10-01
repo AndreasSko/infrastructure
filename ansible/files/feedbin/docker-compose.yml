@@ -61,24 +61,6 @@ services:
     networks:
       - feedbin
     
-  camo:
-    image: increments/camo
-    environment:
-      - PORT=8081
-    env_file:
-     - ./.env
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081"]
-    labels:
-      traefik.enable: "true"
-      traefik.http.routers.feedbin-camo.rule: "Host(`camo-feedbin.andreas-sk.de`)"
-      traefik.http.routers.feedbin-camo.tls: "true"
-      traefik.http.routers.feedbin-camo.tls.certresolver: letsencrypt
-    restart: always
-    networks:
-      - public
-      - feedbin
-    
   feedbin-memcached:
     hostname: memcached
     image: memcached:1.6-alpine
