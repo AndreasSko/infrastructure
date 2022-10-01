@@ -14,15 +14,6 @@ resource "cloudflare_record" "oracle" {
   ttl     = 120
 }
 
-resource "cloudflare_record" "ocis" {
-  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
-  name    = "ocis.andreas-sk.de"
-  value   = cloudflare_record.one-blu.hostname
-  type    = "CNAME"
-  ttl     = 1
-  proxied = true
-}
-
 resource "cloudflare_record" "monitoring" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "monitoring.andreas-sk.de"
