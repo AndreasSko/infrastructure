@@ -6,6 +6,14 @@ resource "cloudflare_record" "one-blu" {
   ttl     = 120
 }
 
+resource "cloudflare_record" "oracle" {
+  zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
+  name    = "oracle"
+  value   = oci_core_instance.andreas-sk-de.public_ip
+  type    = "A"
+  ttl     = 120
+}
+
 resource "cloudflare_record" "ocis" {
   zone_id = lookup(data.cloudflare_zones.andreas_sk.zones[0], "id")
   name    = "ocis.andreas-sk.de"
