@@ -3,7 +3,7 @@ version: '2.2'
 services:
 
   feedbin-web:
-    image: andreassko/feedbin-web:alpine
+    image: andreassko/feedbin-web:latest
     environment:
       PORT: 3000
     env_file:
@@ -24,7 +24,7 @@ services:
       - feedbin
     
   feedbin-workers:
-    image: andreassko/feedbin-web:alpine
+    image: andreassko/feedbin-web:latest
     env_file:
      - ./.env
     command: foreman start
@@ -39,7 +39,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
     volumes:
-      - ./volumes/elasticsearch:/usr/share/elasticsearch/data
+      - ./volumes/elasticsearch/elasticsearch:/usr/share/elasticsearch/data
     environment:
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
@@ -87,7 +87,7 @@ services:
     
   feedbin-extract:
     hostname: feedbin-extract
-    image: andreassko/feedbin-extract
+    image: andreassko/feedbin-extract:latest
     env_file:
       - ./.env
     labels:
