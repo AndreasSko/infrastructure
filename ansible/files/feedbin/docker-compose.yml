@@ -17,10 +17,8 @@ services:
       traefik.http.services.feedbin-web.loadbalancer.server.port: 3000
       traefik.http.middlewares.block-feedbin-signup.plugin.blockpath.regex: "^/signup(.*)"
       traefik.http.middlewares.block-feedbin-users.plugin.blockpath.regex: "^/users(.*)"
-      
     command: sh -c "rm -rf /app/tmp/* && bundle exec rails s --port 3000 --binding 0.0.0.0"
     restart: always
-    mem_limit: 1G
     networks:
       - public
       - feedbin
@@ -31,7 +29,6 @@ services:
      - ./.env
     command: foreman start
     restart: always
-    mem_limit: 600m
     mem_swappiness: 100
     networks:
       - feedbin
@@ -51,7 +48,6 @@ services:
       memlock:
         soft: -1
         hard: -1
-    mem_limit: 256m
     restart: always
     networks:
       - feedbin
@@ -61,7 +57,6 @@ services:
     env_file:
      - ./.env
     restart: always
-    mem_limit: 128m
     mem_swappiness: 100
     networks:
       - feedbin
@@ -88,7 +83,6 @@ services:
     hostname: memcached
     image: memcached:1.6-alpine
     restart: always
-    mem_limit: 128m
     networks:
       - feedbin
     
@@ -99,7 +93,6 @@ services:
     volumes:
       - ./volumes/redis:/data
     restart: always
-    mem_limit: 128m
     networks:
       - feedbin
     
@@ -112,7 +105,6 @@ services:
       - ./volumes/postgres:/var/lib/postgresql/data
       - /mnt/b2/backups/feedbin:/backups
     restart: always
-    mem_limit: 512m
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.feedbin-psql-backup.schedule: "@daily" 
@@ -132,7 +124,6 @@ services:
       traefik.http.routers.feedbin-extract.tls.certresolver: letsencrypt
       traefik.http.services.feedbin-extract.loadbalancer.server.port: 3000
     restart: always
-    mem_limit: 128m
     mem_swappiness: 100
     networks:
       - public
