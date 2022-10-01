@@ -24,6 +24,11 @@ jobs:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        TF_VAR_oracle_compartment_id: ${{ secrets.TF_VAR_ORACLE_COMPARTMENT_ID }}
+        TF_VAR_oracle_fingerprint: ${{ secrets.TF_VAR_ORACLE_FINGERPRINT }}
+        TF_VAR_oracle_private_key: ${{ secrets.TF_VAR_ORACLE_PRIVATE_KEY }}
+        TF_VAR_oracle_tenancy_ocid: ${{ secrets.TF_VAR_ORACLE_TENANCY_OCID }}
+        TF_VAR_oracle_user_ocid: ${{ secrets.TF_VAR_ORACLE_USER_OCID }}
 
     - name: Terraform Format
       working-directory: terraform
@@ -39,7 +44,11 @@ jobs:
         CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         TF_VAR_ssh_pub_key: ${{ secrets.SSH_PUB_KEY }}
         TF_VAR_workstation_ssh_pub_key: ${{ secrets.WORKSTATION_SSH_PUB_KEY }}
-
+        TF_VAR_oracle_compartment_id: ${{ secrets.TF_VAR_ORACLE_COMPARTMENT_ID }}
+        TF_VAR_oracle_fingerprint: ${{ secrets.TF_VAR_ORACLE_FINGERPRINT }}
+        TF_VAR_oracle_private_key: ${{ secrets.TF_VAR_ORACLE_PRIVATE_KEY }}
+        TF_VAR_oracle_tenancy_ocid: ${{ secrets.TF_VAR_ORACLE_TENANCY_OCID }}
+        TF_VAR_oracle_user_ocid: ${{ secrets.TF_VAR_ORACLE_USER_OCID }}
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/master'
@@ -52,6 +61,11 @@ jobs:
         CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         TF_VAR_ssh_pub_key: ${{ secrets.SSH_PUB_KEY }}
         TF_VAR_workstation_ssh_pub_key: ${{ secrets.WORKSTATION_SSH_PUB_KEY }}
+        TF_VAR_oracle_compartment_id: ${{ secrets.TF_VAR_ORACLE_COMPARTMENT_ID }}
+        TF_VAR_oracle_fingerprint: ${{ secrets.TF_VAR_ORACLE_FINGERPRINT }}
+        TF_VAR_oracle_private_key: ${{ secrets.TF_VAR_ORACLE_PRIVATE_KEY }}
+        TF_VAR_oracle_tenancy_ocid: ${{ secrets.TF_VAR_ORACLE_TENANCY_OCID }}
+        TF_VAR_oracle_user_ocid: ${{ secrets.TF_VAR_ORACLE_USER_OCID }}
     
     - name: Setup Ansible & install requirements from Ansible Galaxy
       if: github.ref == 'refs/heads/master'

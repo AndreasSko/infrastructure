@@ -8,6 +8,10 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "3.1.0"
     }
+    oci = {
+      source  = "oracle/oci"
+      version = "4.95.0"
+    }
   }
   required_version = ">= 0.13"
 }
