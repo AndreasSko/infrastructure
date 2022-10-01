@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   telegraf:
-    image: telegraf:1.22.3-alpine
+    image: telegraf:1.22.3
     container_name: telegraf
     restart: always
     environment:
@@ -24,7 +24,7 @@ services:
       - public
     
   influxdb:
-    image: influxdb:1.8-alpine
+    image: influxdb:1.8
     hostname: influxdb
     container_name: influxdb
     restart: always
