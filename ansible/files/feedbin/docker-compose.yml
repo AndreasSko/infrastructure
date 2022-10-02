@@ -34,7 +34,7 @@ services:
       - feedbin
     
   feedbin-elasticsearch:
-    image: elasticsearch:7.17.6
+    image: elasticsearch:8.4.2
     hostname: elasticsearch
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
