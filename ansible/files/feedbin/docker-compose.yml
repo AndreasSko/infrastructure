@@ -70,7 +70,7 @@ services:
       - feedbin
     
   feedbin-postgres:
-    image: postgres:13-alpine
+    image: postgres:14-alpine
     hostname: postgres
     env_file:
      - ./.env
