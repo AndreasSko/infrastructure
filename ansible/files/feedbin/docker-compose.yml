@@ -60,7 +60,7 @@ services:
       - feedbin
     
   feedbin-redis:
-    image: redis:5-alpine
+    image: redis:7-alpine
     hostname: feedbin-redis
     command: "redis-server --appendonly yes"
     volumes:
