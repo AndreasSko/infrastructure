@@ -19,7 +19,7 @@ services:
       - monitoring
 
   ofelia:
-    image: mcuadros/ofelia:v0.3.6
+    image: mcuadros/ofelia:0.3.13
     container_name: ofelia
     command: daemon --docker
     restart: always
