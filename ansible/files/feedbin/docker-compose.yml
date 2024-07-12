@@ -30,6 +30,7 @@ services:
     command: foreman start
     restart: always
     mem_swappiness: 100
+    tty: true
     networks:
       - feedbin
     
