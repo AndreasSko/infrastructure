@@ -1,5 +1,5 @@
 resource "oci_core_instance" "andreas-sk-de" {
-  availability_domain = "FTem:EU-FRANKFURT-1-AD-3"
+  availability_domain = "FTem:EU-FRANKFURT-1-AD-1"
   compartment_id      = var.oracle_compartment_id
   display_name        = "andreas-sk.de"
   state               = "RUNNING"
@@ -25,6 +25,10 @@ resource "oci_core_instance" "andreas-sk-de" {
 
   metadata = {
     ssh_authorized_keys = "${var.ssh_pub_key}\n${var.workstation_ssh_pub_key}"
+  }
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
