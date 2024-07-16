@@ -1,12 +1,12 @@
 resource "oci_core_instance" "andreas-sk-de" {
-  availability_domain = "FTem:EU-FRANKFURT-1-AD-1"
+  availability_domain = "FTem:EU-FRANKFURT-1-AD-2"
   compartment_id      = var.oracle_compartment_id
   display_name        = "andreas-sk.de"
   state               = "RUNNING"
 
   shape = "VM.Standard.A1.Flex"
   shape_config {
-    memory_in_gbs = 24
+    memory_in_gbs = 8
     ocpus         = 4
   }
 
