@@ -27,8 +27,8 @@
     command: chown -R 472:472 /docker/monitoring/volumes/grafana
     become: true
 
-  - name: Start up Monitoring docker-compose 
-    command: docker-compose up -d
+  - name: Start up Monitoring docker compose 
+    command: docker compose up -d
     become: true
     args:
       chdir: /docker/monitoring

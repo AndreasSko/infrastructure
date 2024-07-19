@@ -27,16 +27,16 @@
       dest: /docker/system/traefik.yml
     register: traefik_yml_upload
 
-  - name: Start up System docker-compose 
-    command: docker-compose up -d
+  - name: Start up System docker compose 
+    command: docker compose up -d
     become: true
     args:
       chdir: /docker/system
     environment:
       INFLUXDB_INFLUXDB_USER_PASSWORD: "{{ lookup('env','INFLUXDB_INFLUXDB_USER_PASSWORD') }}"
 
-  - name: Restart System docker-compose
-    command: docker-compose restart
+  - name: Restart System docker compose
+    command: docker compose restart
     become: true
     args:
       chdir: /docker/system
