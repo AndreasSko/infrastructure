@@ -1,13 +1,12 @@
-version: '2.2'
+version: "2.2"
 
 services:
-
   feedbin-web:
     image: andreassko/feedbin-web:latest
     environment:
       PORT: 3000
     env_file:
-     - ./.env
+      - ./.env
     labels:
       traefik.enable: "true"
       traefik.http.routers.feedbin-web.rule: "Host(`feedbin.andreas-sk.de`)"
@@ -22,18 +21,18 @@ services:
     networks:
       - public
       - feedbin
-    
+
   feedbin-workers:
     image: andreassko/feedbin-web:latest
     env_file:
-     - ./.env
+      - ./.env
     command: foreman start
     restart: always
     mem_swappiness: 100
     tty: true
     networks:
       - feedbin
-    
+
   feedbin-elasticsearch:
     image: elasticsearch:7.17.6
     hostname: elasticsearch
@@ -52,16 +51,16 @@ services:
     restart: always
     networks:
       - feedbin
-    
+
   feedbin-memcached:
     hostname: memcached
     image: memcached:1.6-alpine
     restart: always
     networks:
       - feedbin
-    
+
   feedbin-redis:
-    image: redis:5-alpine
+    image: redis:7.2-alpine
     hostname: feedbin-redis
     command: "redis-server --appendonly yes"
     volumes:
@@ -69,23 +68,23 @@ services:
     restart: always
     networks:
       - feedbin
-    
+
   feedbin-postgres:
     image: postgres:16-alpine
     hostname: postgres
     env_file:
-     - ./.env
+      - ./.env
     volumes:
       - ./volumes/postgres:/var/lib/postgresql/data
       - /mnt/b2/backups/feedbin:/backups
     restart: always
     labels:
       ofelia.enabled: "true"
-      ofelia.job-exec.feedbin-psql-backup.schedule: "@daily" 
+      ofelia.job-exec.feedbin-psql-backup.schedule: "@daily"
       ofelia.job-exec.feedbin-psql-backup.command: '/bin/bash -c "pg_dump -U $$POSTGRES_USERNAME -d feedbin_production | bzip2 -c > /backups/$$(date +%Y-%m-%dT%H:%M:%S).sql.bz2"'
     networks:
       - feedbin
-    
+
   feedbin-extract:
     hostname: feedbin-extract
     image: andreassko/feedbin-extract:latest
@@ -102,7 +101,7 @@ services:
     networks:
       - public
       - feedbin
-    
+
 networks:
   feedbin:
   public:
