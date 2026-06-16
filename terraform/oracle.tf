@@ -2,7 +2,7 @@ resource "oci_core_instance" "andreas-sk-de" {
   availability_domain = "FTem:EU-FRANKFURT-1-AD-1"
   compartment_id      = var.oracle_compartment_id
   display_name        = "andreas-sk.de"
-  state               = "RUNNING"
+  state               = "STOPPED"
 
   shape = "VM.Standard.A1.Flex"
   shape_config {
